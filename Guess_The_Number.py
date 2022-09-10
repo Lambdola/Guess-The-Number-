@@ -10,7 +10,7 @@ NUM_DIGITS = 3
 MAX_GUESSES = 10
 #Controls the string to be printed when correct
 VALIDATION = "Correct! You got it"
-#Controls the main game While-loop,line 77. Try changing the value to False and see what happens.
+#Controls the main game While-loop,line 83. Try changing the value to False and see what happens.
 KEY = True
 #Controls the number of "*" that accompanies the 'Do you want to play again' line.
 SEPARATION = 40 
@@ -33,10 +33,10 @@ def getSecretNum():
     #Create a list of numbers from 0 to 9.
     numbers = [str(i) for i in range(10)]
     
-    #Shuffles the created list of numbers randomly.
+    #Shuffles the created list of numbers.
     rd.shuffle(numbers)
     
-    #print(numbers)  #remove the '#' before the print(numbers) to reveal the shuffled numbers.
+    #print(numbers)  #remove the '#' before the print(numbers) to reveal the shuffled numbers when code is run..
     
     #Gets the first NUM_DIGITS digits of the shuffled list and uses it as the SecretNum.
     SecretNum = ""
@@ -46,11 +46,11 @@ def getSecretNum():
         
 
 check = getSecretNum()
-print(check)  #remove the "#" before the print(check) to reveal the SecretNum. <CHEATING>
+#print(check)  #remove the "#" before the print(check) to reveal the SecretNum. <CHEATING>
 
 
 # Returns strings of  'Pico', 'Fermi', 'Bagels' as Clues for a given guess."""
-def getClues(guess, check=check, Validation= VALIDATION):
+def getClues(guess, check=check):
    
     #if given guess is equal to the SecretNum
     if guess == check:
@@ -84,14 +84,15 @@ while KEY:                   # Main game loop.
     print('I have thought up a number.') 
     print(f'You have {MAX_GUESSES} guesses left')
 
-    numGuesses = 1   #counter for number of trials
+    numGuesses = 1   #counter for number of attempts
     while numGuesses <= MAX_GUESSES:   
         guess = ""
-        # Keep looping until they enter a valid guess or run out of trials: 
+        # Keep looping until they enter a valid guess or run out of trials 
         while len(guess) != NUM_DIGITS:
             print(f'Guess #{numGuesses} ')
             guess = input('> ')
-            try:
+            #To validate the given guess 
+            try: 
                 int(guess)
                 assert len(guess) == NUM_DIGITS
             except AssertionError:
@@ -105,7 +106,7 @@ while KEY:                   # Main game loop.
             numGuesses += 1
             print(store_Clues)
             
-            #if attempts equal to number of trials 
+            #if total number of trials has been reached
             if numGuesses > MAX_GUESSES: 
                 print('\nYou ran out of guesses.') 
                 print(f'The answer was {check}.'+'\n'*5)
